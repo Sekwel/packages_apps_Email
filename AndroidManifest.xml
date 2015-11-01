@@ -717,6 +717,7 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="com.android.mail.action.CLEAR_NEW_MAIL_NOTIFICATIONS" />
+                <action android:name="com.android.mail.action.MARK_MESSAGE_AS_READ" />
                 <data android:scheme="content" />
             </intent-filter>
             <intent-filter>

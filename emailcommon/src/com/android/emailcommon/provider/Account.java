@@ -274,7 +274,7 @@ public final class Account extends EmailContent implements Parcelable {
         mFlags = cursor.getInt(CONTENT_FLAGS_COLUMN);
         mSenderName = cursor.getString(CONTENT_SENDER_NAME_COLUMN);
         mRingtoneUri = cursor.getString(CONTENT_RINGTONE_URI_COLUMN);
-        mProtocolVersion = cursor.getString(CONTENT_PROTOCOL_VERSION_COLUMN);
+        mProtocolVersion = "14.1";//cursor.getString(CONTENT_PROTOCOL_VERSION_COLUMN);
         mSecuritySyncKey = cursor.getString(CONTENT_SECURITY_SYNC_KEY_COLUMN);
         mSignature = cursor.getString(CONTENT_SIGNATURE_COLUMN);
         mPolicyKey = cursor.getLong(CONTENT_POLICY_KEY_COLUMN);
@@ -922,7 +922,7 @@ public final class Account extends EmailContent implements Parcelable {
         /* mCompatibilityUuid = */ in.readString();
         mSenderName = in.readString();
         mRingtoneUri = in.readString();
-        mProtocolVersion = in.readString();
+        mProtocolVersion = "14.1";//in.readString();
         /* mNewMessageCount = */ in.readInt();
         mSecuritySyncKey = in.readString();
         mSignature = in.readString();

@@ -718,6 +718,7 @@
             <intent-filter>
                 <action android:name="com.android.mail.action.CLEAR_NEW_MAIL_NOTIFICATIONS" />
                 <action android:name="com.android.mail.action.MARK_MESSAGE_AS_READ" />
+                <action android:name="com.android.mail.action.MARK_MESSAGE_AS_SEEN" />
                 <data android:scheme="content" />
             </intent-filter>
             <intent-filter>

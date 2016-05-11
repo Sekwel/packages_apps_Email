@@ -29,6 +29,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.text.format.DateUtils;
+import android.util.Log;
 
 import com.android.email.DebugUtils;
 import com.android.email.LegacyConversions;
@@ -78,7 +79,7 @@ public class ImapService extends Service {
     private static final long FULL_SYNC_INTERVAL_MILLIS = 4 * DateUtils.HOUR_IN_MILLIS;
 
     // The maximum number of messages to fetch in a single command.
-    private static final int MAX_MESSAGES_TO_FETCH = 500;
+    private static final int MAX_MESSAGES_TO_FETCH = 1;
     private static final int MINIMUM_MESSAGES_TO_SYNC = 10;
     private static final int LOAD_MORE_MIN_INCREMENT = 10;
     private static final int LOAD_MORE_MAX_INCREMENT = 20;
@@ -631,6 +632,9 @@ public class ImapService extends Service {
         if (remoteMessages.length > MAX_MESSAGES_TO_FETCH) {
             List<Message> remoteMessageList = Arrays.asList(remoteMessages);
             for (int start = 0; start < remoteMessageList.size(); start += MAX_MESSAGES_TO_FETCH) {
+                Log.i(Logging.LOG_TAG, "remoteMessageList.size(): " + remoteMessageList.size() + " | currently at: " + start);
+                Log.i(Logging.LOG_TAG, "fetchInternal message id: " + remoteMessageList.get(start).getMessageId() + " | mime type: " + remoteMessageList.get(start).getMimeType() + " | UID: " + remoteMessageList.get(start).getUid());
+
                 int end = start + MAX_MESSAGES_TO_FETCH;
                 if (end >= remoteMessageList.size()) {
                     end = remoteMessageList.size() - 1;
@@ -638,7 +642,13 @@ public class ImapService extends Service {
                 List<Message> chunk = remoteMessageList.subList(start, end);
                 final Message[] partialArray = chunk.toArray(new Message[chunk.size()]);
                 // Fetch this one chunk of messages
-                remoteFolder.fetch(partialArray, fp, null);
+                try {
+                    remoteFolder.fetch(partialArray, fp, null);
+                } catch (Exception e) {
+                    LogUtils.e(Logging.LOG_TAG, "Error fetching partial array. Start: " + start + " | end: " + end);
+                    Throwable throwable = new Throwable();
+                    throwable.printStackTrace();
+                }
             }
         } else {
             remoteFolder.fetch(remoteMessages, fp, null);

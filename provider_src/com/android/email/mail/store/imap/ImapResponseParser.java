@@ -17,6 +17,7 @@
 package com.android.email.mail.store.imap;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.email.DebugUtils;
 import com.android.email.FixedLengthInputStream;
@@ -29,6 +30,7 @@ import com.android.mail.utils.LogUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 
 /**
@@ -167,10 +169,18 @@ public class ImapResponseParser {
 
         } catch (RuntimeException e) {
             // Parser crash -- log network activities.
+            Log.d(Logging.LOG_TAG, "ImapResponseParser readResponse() RuntimeException\n" + e.getMessage());
+            e.printStackTrace();
             onParseError(e);
+            throw e;
+        } catch (SocketTimeoutException e) {
+            Log.d(Logging.LOG_TAG, "ImapResponseParser readResponse() SocketTimeoutException: " + e.getMessage());
+            e.printStackTrace();
             throw e;
         } catch (IOException e) {
             // Network error, or received an unexpected char.
+            Log.d(Logging.LOG_TAG, "ImapResponseParser readResponse() IOException\n" + e.getMessage());
+            e.printStackTrace();
             onParseError(e);
             throw e;
         }
@@ -201,7 +211,7 @@ public class ImapResponseParser {
             }
         } catch (IOException ignore) {
         }
-        LogUtils.w(Logging.LOG_TAG, "Exception detected: " + e.getMessage());
+        LogUtils.w(Logging.LOG_TAG, "Exception detected (ImapResponseParser): " + e.getMessage());
         mDiscourseLogger.logLastDiscourse();
     }
 

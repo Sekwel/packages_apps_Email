@@ -176,7 +176,8 @@ public class ImapResponseParser {
         } catch (SocketTimeoutException e) {
             Log.d(Logging.LOG_TAG, "ImapResponseParser readResponse() SocketTimeoutException: " + e.getMessage());
             e.printStackTrace();
-            throw e;
+            onParseError(e);
+            return new ImapResponse("ERROR", true);
         } catch (IOException e) {
             // Network error, or received an unexpected char.
             Log.d(Logging.LOG_TAG, "ImapResponseParser readResponse() IOException\n" + e.getMessage());

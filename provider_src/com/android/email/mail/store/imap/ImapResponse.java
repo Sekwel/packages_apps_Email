@@ -97,6 +97,10 @@ public class ImapResponse extends ImapList {
         return getListOrEmpty(1).getStringOrEmpty(0);
     }
 
+    public String getTag() {
+        return mTag;
+    }
+
     /**
      * @return Alert message it it has ALERT response code.
      *

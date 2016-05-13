@@ -182,8 +182,7 @@ public class ImapResponseParser {
             Log.d(Logging.LOG_TAG, "ImapResponseParser readResponse() IOException\n" + e.getMessage());
             e.printStackTrace();
             onParseError(e);
-            return new ImapResponse("ERROR", true);
-            //throw e;
+            throw e;
         }
 
         // Handle this outside of try-catch.  We don't have to dump protocol log when getting BYE.

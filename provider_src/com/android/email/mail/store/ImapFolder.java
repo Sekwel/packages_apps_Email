@@ -690,12 +690,7 @@ class ImapFolder extends Folder {
                 try {
                     response = mConnection.readResponse();
 
-                    if ((response.isTagged() && response.getTag().contains("ERROR")) || !response.isDataResponse(1, ImapConstants.FETCH)) {
-                       if (response.isTagged() && response.getTag().contains("ERROR")
-                            LogUtils.e(Logging.LOG_TAG, e, "Error getting message " +String.format(Locale.US,
-                                    ImapConstants.UID_FETCH + " %s (%s)", ImapStore.joinMessageUids(messages),
-                                    Utility.combine(fetchFields.toArray(new String[fetchFields.size()]), ' ')
-                            ));
+                    if (!response.isDataResponse(1, ImapConstants.FETCH)) {
                         continue; // Ignore
                     }
                     final ImapList fetchList = response.getListOrEmpty(2);
@@ -794,7 +789,7 @@ class ImapFolder extends Folder {
                 } finally {
                     destroyResponses();
                 }
-            } while (!response.isTagged() ||  response.getTag().contains("ERROR"));
+            } while (!response.isTagged());
         } catch (IOException ioe) {
             throw ioExceptionHandler(mConnection, ioe);
         }

@@ -74,7 +74,7 @@ import java.util.List;
 public class ImapService extends Service {
     // TODO get these from configurations or settings.
     private static final long QUICK_SYNC_WINDOW_MILLIS = DateUtils.DAY_IN_MILLIS;
-    private static final long FULL_SYNC_WINDOW_MILLIS = 7 * DateUtils.DAY_IN_MILLIS;
+    private static final long FULL_SYNC_WINDOW_MILLIS = 1 * DateUtils.DAY_IN_MILLIS;
     private static final long FULL_SYNC_INTERVAL_MILLIS = 4 * DateUtils.HOUR_IN_MILLIS;
 
     // The maximum number of messages to fetch in a single command.
@@ -392,7 +392,7 @@ public class ImapService extends Service {
         if (account.mSyncLookback == SyncWindow.SYNC_WINDOW_ALL) {
             // This is really for testing. There is no UI that allows setting the sync window for
             // IMAP, but it can be set by sending a special intent to AccountSetupFinal activity.
-            endDate = 0;
+            endDate = System.currentTimeMillis() - FULL_SYNC_WINDOW_MILLIS;
         } else if (fullSync) {
             // Find the oldest message in the local store. We need our time window to include
             // all messages that are currently present locally.

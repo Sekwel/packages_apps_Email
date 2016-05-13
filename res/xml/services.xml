@@ -108,7 +108,7 @@
         email:usesAutodiscover="true"
         email:offerAttachmentPreload="true"
         email:offerLookback="true"
-        email:defaultLookback="auto"
+        email:defaultLookback="days1"
         email:syncContacts="true"
         email:syncCalendar="true"
         email:offerMoveTo="true"

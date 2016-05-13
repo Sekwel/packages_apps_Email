@@ -89,7 +89,6 @@
         email:offerOAuth="true"
         email:offerLoadMore="true"
         email:offerMoveTo="true"
-        email:defaultLookback="days1"
          />
     <emailservice
         email:protocol="@string/protocol_eas"
@@ -109,7 +108,7 @@
         email:usesAutodiscover="true"
         email:offerAttachmentPreload="true"
         email:offerLookback="true"
-        email:defaultLookback="days1"
+        email:defaultLookback="auto"
         email:syncContacts="true"
         email:syncCalendar="true"
         email:offerMoveTo="true"

@@ -19,7 +19,6 @@ package com.android.email.mail.store;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Base64DataException;
-import android.util.Log;
 
 import com.android.email.DebugUtils;
 import com.android.email.mail.store.ImapStore.ImapException;
@@ -513,7 +512,7 @@ class ImapFolder extends Folder {
         if (start < 1 || end < 1 || end < start) {
             throw new MessagingException(String.format("Invalid range: %d %d", start, end));
         }
-        Log.d(Logging.LOG_TAG, "getMessages number " + start + " - " + end);
+        LogUtils.d(Logging.LOG_TAG, "getMessages number " + start + " - " + end);
         return getMessagesInternal(
                 searchForUids(String.format(Locale.US, "%d:%d NOT DELETED", start, end)), listener);
     }
@@ -611,10 +610,8 @@ class ImapFolder extends Folder {
         try {
             fetchInternal(messages, fp, listener);
         } catch (RuntimeException e) { // Probably a parser error.
-            Log.w(Logging.LOG_TAG, "Exception detected (ImapFolder): " + e.getMessage());
+            LogUtils.w(Logging.LOG_TAG, "Exception detected: " + e.getMessage());
             if (mConnection != null) {
-                Throwable throwable = new Throwable();
-                throwable.printStackTrace();
                 mConnection.logLastDiscourse();
             }
             throw e;
@@ -629,7 +626,6 @@ class ImapFolder extends Folder {
         checkOpen();
         HashMap<String, Message> messageMap = new HashMap<String, Message>();
         for (Message m : messages) {
-            //Log.w(Logging.LOG_TAG, "fetchInternal message id: " + m.getMessageId() + " | mime type: " + m.getMimeType() + " | content ID: " + m.getContentId() + " | UID: " + m.getUid());
             messageMap.put(m.getUid(), m);
         }
 

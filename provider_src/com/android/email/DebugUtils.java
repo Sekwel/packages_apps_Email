@@ -16,9 +16,9 @@ public class DebugUtils {
 
     public static void init(final Context context) {
         final Preferences prefs = Preferences.getPreferences(context);
-        DEBUG = true;//= prefs.getEnableDebugLogging();
-        DEBUG_EXCHANGE = true;// prefs.getEnableExchangeLogging();
-        DEBUG_FILE = true;// prefs.getEnableExchangeFileLogging();
+        DEBUG = prefs.getEnableDebugLogging();
+        DEBUG_EXCHANGE = prefs.getEnableExchangeLogging();
+        DEBUG_FILE = prefs.getEnableExchangeFileLogging();
 
         // Enable logging in the EAS service, so it starts up as early as possible.
         updateLoggingFlags(context);

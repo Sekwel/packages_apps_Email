@@ -89,15 +89,15 @@ public class DebugFragment extends Fragment implements OnCheckedChangeListener,
         switch (buttonView.getId()) {
             case R.id.debug_logging:
                 mPreferences.setEnableDebugLogging(isChecked);
-                DebugUtils.DEBUG = true;// = isChecked;
+                DebugUtils.DEBUG = isChecked;
                 break;
             case R.id.exchange_logging:
                 mPreferences.setEnableExchangeLogging(isChecked);
-                DebugUtils.DEBUG_EXCHANGE = true;// = isChecked;
+                DebugUtils.DEBUG_EXCHANGE = isChecked;
                 break;
             case R.id.file_logging:
                 mPreferences.setEnableExchangeFileLogging(isChecked);
-                DebugUtils.DEBUG_FILE = true;// = isChecked;
+                DebugUtils.DEBUG_FILE = isChecked;
                 break;
             case R.id.debug_enable_strict_mode:
                 mPreferences.setEnableStrictMode(isChecked);

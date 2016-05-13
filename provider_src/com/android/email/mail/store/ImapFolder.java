@@ -692,7 +692,7 @@ class ImapFolder extends Folder {
 
                     if ((response.isTagged() && response.getTag().contains("ERROR")) || !response.isDataResponse(1, ImapConstants.FETCH)) {
                        if (response.isTagged() && response.getTag().contains("ERROR")) {
-                           LogUtils.e(Logging.LOG_TAG, "Error getting message " + String.format(Locale.US,
+                           LogUtils.e(Logging.LOG_TAG, e, "Error getting message " + String.format(Locale.US,
                                    ImapConstants.UID_FETCH + " %s (%s)", ImapStore.joinMessageUids(messages),
                                    Utility.combine(fetchFields.toArray(new String[fetchFields.size()]), ' ')
                            ));

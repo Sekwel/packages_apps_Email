@@ -258,7 +258,7 @@ public class ImapService extends Service {
 
         FetchProfile fp = new FetchProfile();
         fp.add(FetchProfile.Item.STRUCTURE);
-        remoteFolder.fetch(messages.toArray(new Message[messages.size()]), fp, null);
+       // remoteFolder.fetch(messages.toArray(new Message[messages.size()]), fp, null);
         Message [] oneMessageArray = new Message[1];
         for (Message message : messages) {
             // Build a list of parts we are interested in. Text parts will be downloaded

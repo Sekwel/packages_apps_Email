@@ -795,7 +795,7 @@ class ImapFolder extends Folder {
                 } finally {
                     destroyResponses();
                 }
-            } while (!response.isTagged() ||  response.getTag().contains("ERROR"));
+            } while (!response.isTagged());
         } catch (IOException ioe) {
             throw ioExceptionHandler(mConnection, ioe);
         }

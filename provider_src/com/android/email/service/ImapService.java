@@ -261,7 +261,6 @@ public class ImapService extends Service {
        // remoteFolder.fetch(messages.toArray(new Message[messages.size()]), fp, null);
         Message [] oneMessageArray = new Message[1];
         for (Message message : messages) {
-            remoteFolder.fetch(oneMessageArray, fp, null);
             // Build a list of parts we are interested in. Text parts will be downloaded
             // right now, attachments will be left for later.
             ArrayList<Part> viewables = new ArrayList<Part>();
